@@ -42,15 +42,15 @@ ext {
 
 
     appDeps = [
-            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVer}",
-            appcompat   : "androidx.appcompat:appcompat:${androidXVer}",
-            rxKotlin    : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVer}",
-            rxAndroid   : "io.reactivex.rxjava2:rxandroid:${rxAndroidVer}",
+            kotlin   : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVer}",
+            appcompat: "androidx.appcompat:appcompat:${androidXVer}",
+            rxKotlin : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVer}",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:${rxAndroidVer}",
 
-            koin        : "org.koin:koin-android:${koinVer}",
+            koin     : "org.koin:koin-android:${koinVer}",
 //            koinScope    : "org.koin:koin-androidx-scope:${koinVer}",
 
-            logger      : "com.orhanobut:logger:${loggerVer}"
+            logger   : "com.orhanobut:logger:${loggerVer}"
     ]
 
     uiDeps = [
@@ -77,6 +77,7 @@ ext {
     ]
 
     domainDeps = [
+            rxJava  : "io.reactivex.rxjava2:rxjava:${rxJavaVer}",
             rxKotlin: "io.reactivex.rxjava2:rxkotlin:${rxKotlinVer}",
             koin    : "org.koin:koin-core:${koinVer}"
     ]

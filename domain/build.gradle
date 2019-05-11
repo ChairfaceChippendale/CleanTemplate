@@ -4,9 +4,10 @@ dependencies {
     def domainDeps = rootProject.ext.domainDeps
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation domainDeps.rxJava
     implementation domainDeps.rxKotlin
     implementation domainDeps.koin
-
 }
 
 sourceCompatibility = "7"
