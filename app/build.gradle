@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdk
+    buildToolsVersion rootProject.ext.androidBuildTools
+
+    defaultConfig {
+        applicationId "io.osav.stat"
+        minSdkVersion rootProject.ext.androidMinSdk
+        targetSdkVersion rootProject.ext.androidTargetSdk
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    testOptions {
+        unitTests.all {
+            jvmArgs '-noverify'
+        }
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+    generateStubs = true
+}
+
+dependencies {
+    def appDeps = rootProject.ext.appDeps
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':ui')
+
+    implementation appDeps.kotlin
+    implementation appDeps.appcompat
+    implementation appDeps.rxKotlin
+    implementation appDeps.rxAndroid
+    implementation appDeps.koin
+    implementation appDeps.logger
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

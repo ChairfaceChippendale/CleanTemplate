@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/teal</color>
+    <color name="colorPrimaryDark">@color/aqua_deep</color>
+    <color name="colorAccent">@color/amaranth</color>
+
+
+    <color name="teal">008577</color>
+    <color name="aqua_deep">014B43</color>
+    <color name="amaranth">D81B60</color>
+</resources>

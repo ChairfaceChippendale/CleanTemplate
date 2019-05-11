@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdk
+    buildToolsVersion rootProject.ext.androidBuildTools
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.androidMinSdk
+        targetSdkVersion rootProject.ext.androidTargetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    testOptions {
+        unitTests.all {
+            jvmArgs '-noverify'
+        }
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+    generateStubs = true
+}
+
+dependencies {
+    def dataDeps = rootProject.ext.dataDeps
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+
+    implementation dataDeps.kotlin
+    implementation dataDeps.rxKotlin
+    implementation dataDeps.koin
+//  implementation dataDeps.koinScope
+
+    implementation dataDeps.gson
+    implementation dataDeps.okhttp
+    implementation dataDeps.okhttpInterceptor
+    implementation dataDeps.retrofit
+    implementation dataDeps.retrofitGson
+    implementation dataDeps.retrofitRx
+    debugImplementation dataDeps.chuckDebug//HTTP inspector
+    releaseImplementation dataDeps.chuckRelease
+
+    implementation dataDeps.binaryPref
+    implementation dataDeps.room
+    kapt dataDeps.roomCompiler
+    implementation dataDeps.roomRx
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

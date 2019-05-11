@@ -1,0 +1,77 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.androidMinSdk
+        targetSdkVersion rootProject.ext.androidTargetSdk
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    testOptions {
+        unitTests.all {
+            jvmArgs '-noverify'
+        }
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+    generateStubs = true
+}
+
+dependencies {
+    def uiDeps = rootProject.ext.uiDeps
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+
+    implementation uiDeps.kotlin
+    implementation uiDeps.appcompat
+    implementation uiDeps.ktx
+    implementation uiDeps.constraint
+    implementation uiDeps.recyclerview
+    implementation uiDeps.support
+    implementation uiDeps.lcExtensions
+    kapt uiDeps.lcCompiler
+    implementation uiDeps.lcStream
+    implementation uiDeps.rxKotlin
+    implementation uiDeps.rxAndroid
+    implementation uiDeps.rxBinding
+    implementation uiDeps.koin
+//    implementation uiDeps.koinScope
+    implementation uiDeps.koinViewModel
+    implementation uiDeps.glide
+    kapt uiDeps.glideCompiler
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

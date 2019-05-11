@@ -1,0 +1,13 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    def domainDeps = rootProject.ext.domainDeps
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation domainDeps.rxKotlin
+    implementation domainDeps.koin
+
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
