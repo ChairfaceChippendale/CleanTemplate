@@ -5,7 +5,7 @@
     <color name="colorAccent">@color/amaranth</color>
 
 
-    <color name="teal">008577</color>
-    <color name="aqua_deep">014B43</color>
-    <color name="amaranth">D81B60</color>
+    <color name="teal">#008577</color>
+    <color name="aqua_deep">#014B43</color>
+    <color name="amaranth">#D81B60</color>
 </resources>

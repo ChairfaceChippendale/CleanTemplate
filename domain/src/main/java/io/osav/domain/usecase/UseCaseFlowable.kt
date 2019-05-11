@@ -4,14 +4,16 @@ import io.osav.domain.executor.PostExecutionThread
 import io.osav.domain.executor.ThreadExecutor
 import io.reactivex.Flowable
 import io.reactivex.annotations.NonNull
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.DisposableSubscriber
 
 
 abstract class UseCaseFlowable<T, in Params>(
     private val threadExecutor: ThreadExecutor,
-    private val postExecutionThread: PostExecutionThread
-): Disposable() {
+    private val postExecutionThread: PostExecutionThread,
+    disposable: CompositeDisposable
+): Disposable(disposable) {
 
     abstract fun buildUseCase(@NonNull params: Params): Flowable<T>
 

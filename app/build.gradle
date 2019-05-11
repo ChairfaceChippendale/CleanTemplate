@@ -53,6 +53,8 @@ dependencies {
     def appDeps = rootProject.ext.appDeps
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':ui')
+    implementation project(':domain')
+    implementation project(':data')
 
     implementation appDeps.kotlin
     implementation appDeps.appcompat
