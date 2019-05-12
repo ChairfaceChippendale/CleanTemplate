@@ -1,17 +1,19 @@
 package io.osav.data.info
 
+import io.osav.data.info.remote.InfoRemote
 import io.osav.domain.gateway.info.InfoGateway
+import io.osav.domain.usecase.info.model.Info
 import io.reactivex.Maybe
-import java.lang.IllegalStateException
+
 
 class InfoGatewayImpl(
-    val log: (String) -> Unit,
-    val exLog: (String, Throwable) -> Unit
+    private val logger: (String) -> Unit,
+    private val infoRemote: InfoRemote
 ): InfoGateway {
 
-    override fun getInfo(): Maybe<String> {
-        log("Hello")
-        exLog("Gabela", IllegalStateException("Fatal"))
-        return Maybe.just("Yes")
+    override fun getInfo(query: String): Maybe<Info> {
+        return infoRemote.getInfo(query)
+            .map { it.toInfo() }
+            .toMaybe()
     }
 }

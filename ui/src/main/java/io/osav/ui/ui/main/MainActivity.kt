@@ -10,13 +10,8 @@ import org.koin.android.ext.android.inject
 
 class MainActivity: BaseActivity() {
 
-    val g: InfoGateway by inject()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        g.getInfo().subscribe()
     }
 }
