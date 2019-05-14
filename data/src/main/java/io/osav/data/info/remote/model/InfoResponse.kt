@@ -1,4 +1,4 @@
-package io.osav.data.info.model
+package io.osav.data.info.remote.model
 
 import com.google.gson.annotations.SerializedName
 

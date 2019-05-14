@@ -1,11 +1,9 @@
 package io.osav.data.di
 
-import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import io.osav.data.ApiConst
 import io.osav.data.info.remote.InfoApi
 import io.osav.data.interceptor.LoggingInterceptor
-import io.osav.data.serializer.StringDeserializer
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.core.qualifier.named

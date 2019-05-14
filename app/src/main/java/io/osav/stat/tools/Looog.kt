@@ -68,4 +68,8 @@ object Looog {
     fun ex(tag: String) = { message: String, throwable: Throwable ->
         Logger.t(tag).e(throwable, message)
     }
+
+    fun th(tag: String) = { throwable: Throwable ->
+        Logger.t(tag).e(throwable, throwable.message ?: "")
+    }
 }

@@ -33,4 +33,7 @@ val coreModule = module {
     single(named("room")){ Looog.d(tag = "ROOM")}
     single(named("data")){ Looog.d(tag = "DATA")}
     single(named("data_ex")){ Looog.ex(tag = "DATA")}
+    single(named("storage_ex")){ Looog.ex(tag = "STORE")}
+    single(named("pref_ex")){ Looog.th(tag = "STORE")}
+
 }
