@@ -48,12 +48,14 @@ class InfoStoragePref(
         return Flowable.create<InfoStored>({ emitter ->
 
             val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-                val infoJson = prefs.getString(INFO_KEY, null) ?: ""
-                if (infoJson.isEmpty()) {
-                    emitter.onError(Exception("No Info in the Storage"))
-                }
-                catchGson<InfoStored> (logger){ gson.fromJson(infoJson, InfoStored::class.java)}?.let {
-                    emitter.onNext(it)
+                if  (key == INFO_KEY) {
+                    val infoJson = prefs.getString(INFO_KEY, null) ?: ""
+                    if (infoJson.isEmpty()) {
+                        emitter.onError(Exception("No Info in the Storage"))
+                    }
+                    catchGson<InfoStored>(logger) { gson.fromJson(infoJson, InfoStored::class.java) }?.let {
+                        emitter.onNext(it)
+                    }
                 }
             }
 
