@@ -2,8 +2,9 @@ package io.osav.data.di
 
 import com.google.gson.GsonBuilder
 import io.osav.data.ApiConst
-import io.osav.data.info.remote.InfoApi
+import io.osav.data.dog.remote.DogApi
 import io.osav.data.interceptor.LoggingInterceptor
+import io.osav.data.serializer.StringDeserializer
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.core.qualifier.named
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit
 val remoteModule = module {
 
     factory {
-        get<Retrofit>().create(InfoApi::class.java)
+        get<Retrofit>().create(DogApi::class.java)
     }
 
     factory {
@@ -30,7 +31,7 @@ val remoteModule = module {
 
     single {
         OkHttpClient.Builder()
-            .addInterceptor(get(named("log_interceptor")))
+            .addInterceptor(get(named("logging_interceptor")))
             .connectTimeout(ApiConst.CONNECTION_TIMEOUT_SEC, TimeUnit.SECONDS)
             .readTimeout(ApiConst.READ_TIMEOUT_SEC, TimeUnit.SECONDS)
             .writeTimeout(ApiConst.WRITE_TIMEOUT_SEC, TimeUnit.SECONDS)
@@ -47,8 +48,8 @@ val remoteModule = module {
             .create()
     }
 
-    single<Interceptor>(named("log_interceptor")) {
+    single<Interceptor>(named("logging_interceptor")) {
         val level = if (getProperty("debug")) LoggingInterceptor.Level.BODY else LoggingInterceptor.Level.NONE
-        LoggingInterceptor(level, get(named("net")))
+        LoggingInterceptor(level, get(named("log_net")))
     }
 }

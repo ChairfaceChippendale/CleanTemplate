@@ -29,11 +29,11 @@ val coreModule = module {
 
     factory { CompositeDisposable() }
 
-    single(named("net")){ Looog.i(tag = "NET")}
-    single(named("room")){ Looog.d(tag = "ROOM")}
-    single(named("data")){ Looog.d(tag = "DATA")}
-    single(named("data_ex")){ Looog.ex(tag = "DATA")}
-    single(named("storage_ex")){ Looog.ex(tag = "STORE")}
-    single(named("pref_ex")){ Looog.th(tag = "STORE")}
+    single(named("log_net")){ Looog.i(tag = "NET")}
+    single(named("log_room")){ Looog.d(tag = "ROOM")}
+    single(named("log_data")){ Looog.d(tag = "DATA")}
+    single(named("log_ex_data")){ Looog.ex(tag = "DATA")}
+    single(named("log_ex_storage")){ Looog.ex(tag = "STORE")}
+    single(named("log_ex_pref")){ Looog.th(tag = "STORE")}
 
 }

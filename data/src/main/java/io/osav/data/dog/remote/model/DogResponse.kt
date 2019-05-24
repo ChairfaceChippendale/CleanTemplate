@@ -1,8 +1,8 @@
-package io.osav.data.info.remote.model
+package io.osav.data.dog.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class InfoResponse (
+data class DogResponse (
     @SerializedName("text")
     val text: String
 )
