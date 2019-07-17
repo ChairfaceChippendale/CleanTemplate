@@ -6,6 +6,7 @@ import io.osav.data.cats.local.model.toCatRoom
 import io.osav.domain.usecase.cat.model.Cat
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Maybe
 import io.reactivex.Single
 
 class CatStorageRoom(
@@ -21,6 +22,8 @@ class CatStorageRoom(
     override fun getCats(): Single<List<Cat>> =
         catDao.getAll().map { list -> list.map { it.toCat() } }
 
+    override fun getCatById(id: String): Maybe<Cat> =
+        catDao.getById(id).map { it.toCat() }
 
     override fun observeCats(): Flowable<List<Cat>> =
         catDao.observeAll().map { list -> list.map { it.toCat() } }

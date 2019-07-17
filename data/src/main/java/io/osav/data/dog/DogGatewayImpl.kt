@@ -10,7 +10,7 @@ class DogGatewayImpl(
     private val dogRemote: DogRemote
 ): DogGateway {
 
-    override fun getInfo(query: String): Maybe<Dog> {
+    override fun getDog(query: String): Maybe<Dog> {
         return dogRemote.fetchDog(query)
             .toMaybe()
     }

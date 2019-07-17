@@ -5,6 +5,6 @@ import io.reactivex.Maybe
 
 interface DogGateway {
 
-    fun getInfo(query: String): Maybe<Dog>
+    fun getDog(query: String): Maybe<Dog>
 
 }

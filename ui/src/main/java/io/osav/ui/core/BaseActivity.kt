@@ -1,12 +1,28 @@
 package io.osav.ui.core
 
 import android.content.Context
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleRegistry
 
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity<out VIEW_MODEL : BaseViewModel?>(
+    @LayoutRes layout: Int
+): AppCompatActivity() {
+
+    private val registry: LifecycleRegistry
+        get() = LifecycleRegistry(this)
+
+    private val disposableObserver: DisposablesObserver
+        get() = DisposablesObserver(registry)
+
+    private var rootView: View? = null
+
+
+
 
     fun hideKeyboard() {
         currentFocus?.windowToken?.let {

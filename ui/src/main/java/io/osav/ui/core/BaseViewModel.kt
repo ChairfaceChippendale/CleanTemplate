@@ -1,4 +1,4 @@
-package io.osav.ui.ui
+package io.osav.ui.core
 
 class BaseViewModel {
 }

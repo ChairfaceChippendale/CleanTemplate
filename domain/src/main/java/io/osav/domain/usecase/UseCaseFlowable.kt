@@ -18,9 +18,27 @@ abstract class UseCaseFlowable<T, in Params>(
     abstract fun buildUseCase(@NonNull params: Params): Flowable<T>
 
     fun execute(@NonNull observer: DisposableSubscriber<T>, @NonNull params: Params) {
+
         val observable = this.buildUseCase(params)
             .subscribeOn(Schedulers.from(threadExecutor))
             .observeOn(postExecutionThread.getScheduler())
+
         addDisposable(observable.subscribeWith(observer))
+    }
+
+    fun executeBy(@NonNull params: Params,
+                  onNext: (t: T) -> Unit,
+                  onError: (e: Throwable) -> Unit,
+                  onComplete: () -> Unit) {
+
+        val observable = this.buildUseCase(params)
+            .subscribeOn(Schedulers.from(threadExecutor))
+            .observeOn(postExecutionThread.getScheduler())
+
+        addDisposable(observable.subscribeWith(object : DisposableSubscriber<T>(){
+            override fun onNext(t: T) = onNext(t)
+            override fun onComplete() = onComplete()
+            override fun onError(e: Throwable) = onError(e)
+        }))
     }
 }
